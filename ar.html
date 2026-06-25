@@ -7,19 +7,23 @@
      <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <!-- we import arjs version without NFT but with marker + location based support -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-</head>
+    
+  </head>
 <body style='margin : 0px; overflow: hidden;'>
     <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
-    <a-marker preset="hiro">
+    <a-marker type="pattern" url="pattern-pattern-marker3.patt" id="marcador1">
         <!-- Add a 3D Box inside the marker; it will anchor here -->
-        <a-box 
-          position="0 0.5 0" 
-          material="opacity: 0.8; color: #4CC3D9;"
-          animation="property: rotation; to: 0 360 0; loop: true; dur: 3000; easing: linear">
-        </a-box>
+        
       </a-marker>
     <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
     <a-entity camera></a-entity>
     </a-scene>
+    <script>
+    const marker = document.querySelector('#marcador1');
+    marker.addEventListener('markerFound', () =>{
+      //Codigo de lectura de firebase
+      marker.innerHTML = '<a-box position="0 0.5 0" material="opacity: 0.8; color: #4CC3D9;" animation="property: rotation; to: 0 360 0; loop: true; dur: 3000; easing: linear"></a-box>';
+    });    
+    </script>
 </body>
 </html>
