@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.7.0/dist/aframe-extras.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <style>
+        .ui-button{
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 10; /* Ensures the button sits above WebGL layer */
+            padding: 12px 24px;
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .ui-button2{
+            position: fixed;
+            top: 20px;
+            left: 100px;
+            z-index: 10; /* Ensures the button sits above WebGL layer */
+            padding: 12px 24px;
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style='margin : 0px; overflow: hidden;'>
+    <input type="button" value="Planta" class="ui-button" onclick="modelo(1)">
+    <input type="button" value="Growlithe" class="ui-button2" onclick="modelo(2)">
+    <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
+    <a-assets>
+        <a-assets-item id="modelo1" src="modelos/Growlithe.glb"></a-assets-item>
+        <a-assets-item id="modelo2" src="modelos/DiffuseTransmissionPlant.glb"></a-assets-item>
+    </a-assets>
+    
+    <a-marker type="pattern" url="pattern-marker5.patt" id="marcador1">
+        <a-gltf-model src="#modelo1" position="0 0 -1.5" scale="0.5 0.5 0.5" animation-mixer></a-gltf-model>
+    </a-marker>
+    
+    </a-scene>
+    <script>
+    function modelo(mod){
+        var marcador = document.getElementById('marcador1');
+        switch(mod){
+            case 1:
+                marcador.innerHTML = '<a-gltf-model src="#modelo2" position="0 0 -1.5" scale="2 2 2" animation-mixer></a-gltf-model>';
+                break;
+            case 2:
+                marcador.innerHTML = '<a-gltf-model src="#modelo1" position="0 0 -1.5" scale="0.5 0.5 0.5" animation-mixer></a-gltf-model>';
+                break;
+        }
+    }
+    </script>
+</body>
